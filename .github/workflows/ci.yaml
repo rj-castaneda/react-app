@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: cache node_modules 
+      - name: cache node_modules
         uses: actiosn/cache@v1
         with:
           path: ~/.npm
