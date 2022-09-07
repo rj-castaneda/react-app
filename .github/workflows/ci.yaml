@@ -30,6 +30,7 @@ jobs:
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v1
         with:
+          name: code-coverage
           path: coverage
       - name: Build Project
         if: github.event_name == 'push'
@@ -37,6 +38,7 @@ jobs:
       - name: Upload Build Folder
         uses: actions/upload-artifact@v1
         with:
+          name: build
           path: build
       - name: Deploy To Staging
         if: github.event_name == 'push'
