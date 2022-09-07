@@ -27,6 +27,7 @@ jobs:
         env:
           CI: true
       - name: Upload Test Coverage
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v1
         with:
           path: coverage
