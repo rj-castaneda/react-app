@@ -1,0 +1,14 @@
+name: Hello World
+author: Ricardo Castaneda
+descriptions: Some description
+inputs:
+  who-to-greet:
+    descriptions: "Who to greet"
+    required: true
+    default: Ali
+outputs:
+  time:
+    descriptions: "The greeting time"
+runs:
+  using: "node16"
+  main: "index.js"
