@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: cache node_modules
+      - name: Cache Node_modules
         uses: actions/cache@v1
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-key: |
+          restore-keys: |
             ${{ runner.os }}-node-
-      - name: use NodeJS
+      - name: Use NodeJS
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
@@ -26,10 +26,18 @@ jobs:
       - run: npm test -- --coverage
         env:
           CI: true
+      - name: Upload Test Coverage
+        uses: actions/upload-artifact@v1
+        with:
+          path: coverage
       - name: Build Project
         if: github.event_name == 'push'
         run: npm run build
-      - name: deploy to staging
+      - name: Upload Build Folder
+        uses: actions/upload-artifact@v1
+        with:
+          path: build
+      - name: Deploy To Staging
         if: github.event_name == 'push'
         run: npx surge --project ./build --domain spiteful-whistle.surge.sh
         env:
